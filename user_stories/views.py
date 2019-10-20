@@ -2,15 +2,17 @@ from django.shortcuts import render
 from user_stories.models import User
 from django.db import IntegrityError
 import requests
+from user_stories.helper import save_comments, save_users
+# from django.db import transaction
+
 
 def index(request):
     response = requests.get('https://jsonplaceholder.typicode.com/users')
     users = response.json()
-    print(users)
+    # print(users)
     users_refined = []
     status = 'ok'
     for user in users:
-        print(" --------------------------------user ", user['address'])
         try:
             new_user = User()
             new_user.name = user['name']
@@ -33,3 +35,13 @@ def index(request):
         'status': status,
         'users': users_refined,
     })
+
+
+def user_comments(request):
+    response = requests.get('https://jsonplaceholder.typicode.com/comments')
+    comments = response.json()
+    status = save_comments(comments)
+    return render(request, 'user_stories/comments.html', {
+        'status': status
+    })
+

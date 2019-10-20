@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from user_stories.views import index
+from user_stories.views import index, user_comments
 urlpatterns = [
     url(r'^$', index, name='index'),
+    url(r'^comments/', user_comments, name ='user_comments'),
     path('admin/', admin.site.urls),
 ]
