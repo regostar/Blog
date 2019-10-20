@@ -1,0 +1,21 @@
+
+{% block content %}
+    <h2>USER API</h2>
+    {% if status == 'ok' %}
+
+        <p>The Data  :- {{status}}  </p>
+
+        {% for user in users %}
+            <p>Your Name is {{user.name}} email-address is <strong>{{ user.email }}</strong> </p>
+        {% endfor %}
+
+    {% elif status == 'existing' %}
+        <p> The API provides the same 10 users everytime, these users are already stored in the DB So if you want then delete the db contents and then visit this link</p>
+
+    {% else %}
+        <p> Some Error occurred </p>
+
+    {% endif %}
+
+
+{% endblock %}
