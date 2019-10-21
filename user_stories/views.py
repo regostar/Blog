@@ -13,6 +13,7 @@ def index(request):
     users_refined = []
     status = 'ok'
     for user in users:
+        # can do similar to user_comments by using a helper function
         try:
             new_user = User()
             new_user.name = user['name']
